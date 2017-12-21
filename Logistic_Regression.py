@@ -39,7 +39,7 @@ diff = 1
 with tf.Session() as sess:
     sess.run(init)
 
-    correct_predict = tf.equal(tf.argmax(Z, 1), tf.argmax(Y, 1))
+    correct_predict = tf.equal(tf.argmax(tf.nn.softmax(Z), 1), tf.argmax(Y, 1))
     accuracy = tf.reduce_mean(tf.cast(correct_predict, "float"))
     for epoch in range(num_epochs):
         if epoch > 1 and diff <.00001:

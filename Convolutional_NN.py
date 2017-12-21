@@ -93,8 +93,8 @@ layer_drop = tf.nn.dropout(relu_fc1, keep_prob)
 fc = tf.matmul(layer_drop,W_fc2) + b_fc2
 y_CNN = tf.nn.softmax(fc)
 
-loss = tf.reduce_mean(-tf.reduce_sum(y*tf.log(y_CNN), reduction_indices=[1]))
-# loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits = fc, labels = y))
+#loss = tf.reduce_mean(-tf.reduce_sum(y*tf.log(y_CNN), reduction_indices=[1]))
+loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits = fc, labels = y))
 optimizer = tf.train.AdamOptimizer(1e-4).minimize(loss)
 
 correct_prediciton = tf.equal(tf.argmax(y_CNN,1),tf.argmax(y,1))
