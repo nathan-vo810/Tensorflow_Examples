@@ -1,8 +1,9 @@
 import numpy as np
 import tensorflow as tf
+import matplotlib.pyplot as plt
 
 #Initialize data
-X = np.random.rand(1000)
+X = np.random.rand(10)
 Y = X * 3 + 2
 Y = np.vectorize(lambda Y : Y + np.random.normal(loc = 0.0, scale = 0.1))(Y)
 
@@ -26,3 +27,10 @@ with tf.Session() as sess:
             if step % 5 == 0:
                 print(step, evals)
                 train_data.append(evals)
+
+
+plt.plot(X,Y,'ro')
+# plt.legend(['Actual','Predict'])
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.show()
