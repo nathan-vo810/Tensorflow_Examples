@@ -15,7 +15,7 @@ X = tf.placeholder(tf.float32,[None,numFeatures], name = "X")
 Y = tf.placeholder(tf.float32,[None,numLabels], name = "Y")
 
 W = tf.get_variable(name = "W", shape = [numFeatures,numLabels], initializer=tf.contrib.layers.xavier_initializer())
-b = tf.get_variable(name = "b", shape = [1,numLabels], initializer=tf.zeros_initializer())
+b = tf.get_variable(name = "b", shape = [numLabels], initializer=tf.zeros_initializer())
 
 Z = tf.add(tf.matmul(X,W),b)
 
@@ -39,7 +39,7 @@ diff = 1
 with tf.Session() as sess:
     sess.run(init)
 
-    correct_predict = tf.equal(tf.argmax(tf.nn.softmax(Z), 1), tf.argmax(Y, 1))
+    correct_predict = tf.equal(tf.argmax(Z, 1), tf.argmax(Y, 1))
     accuracy = tf.reduce_mean(tf.cast(correct_predict, "float"))
     for epoch in range(num_epochs):
         if epoch > 1 and diff <.00001:
