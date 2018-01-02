@@ -111,7 +111,11 @@ with tf.Session() as session:
             print("Step %d, training accuracy %g"%(i,float(train_accuracy)))
         optimizer.run(feed_dict={x:batch[0], y:batch[1], keep_prob:0.5})
 
+    test_len = 128
+    testimgs = mnist.test.images[:test_len]
+    testlabels = mnist.test.labels[:test_len]
 
+    print("Test accuracy: ",session.run(accuracy,feed_dict={x:testimgs,y:testlabels}))
 
 
 
